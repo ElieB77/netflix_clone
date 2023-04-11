@@ -20,7 +20,7 @@ export const Navbar = (): JSX.Element => {
           {menu.links.map((link: LinkType) => {
             const { content, href, id } = link;
             return (
-              <Link key={id} href={href}>
+              <Link className={styles.navbar__link} key={id} href={href}>
                 <li>{content}</li>
               </Link>
             );
