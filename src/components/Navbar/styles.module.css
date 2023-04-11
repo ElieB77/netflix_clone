@@ -1,0 +1,22 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 50px;
+}
+.navbar__left {
+  display: flex;
+  align-items: center;
+}
+.navbar__links {
+  display: flex;
+  gap: 15px;
+  margin-left: 50px;
+}
+.navbar__icons {
+  display: flex;
+  gap: 15px;
+}
+.navbar__icon {
+  cursor: pointer;
+}
