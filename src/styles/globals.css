@@ -42,6 +42,15 @@ body {
   --success-color: #46d369;
 }
 
+h1,
+h2,
+h3,
+li,
+a,
+p {
+  user-select: none;
+}
+
 h1 {
   font-size: 50px;
 }
@@ -63,4 +72,18 @@ a {
   text-decoration: none;
   color: inherit;
   font-family: "Roboto Light", sans-serif;
+}
+
+p {
+  line-height: 30px;
+}
+
+.large__paragraph {
+  font-size: 20px;
+}
+
+.button {
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
 }
