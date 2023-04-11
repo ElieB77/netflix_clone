@@ -1,7 +1,13 @@
 import Head from "next/head";
 import { Navbar } from "@/components/Navbar";
+import { fetchData } from "@/services/http";
 
-export default function Home() {
+interface HomeProps {
+  popularMovies?: any;
+}
+
+export default function Home(props: HomeProps): JSX.Element {
+  console.log(props.popularMovies);
   return (
     <>
       <Head>
@@ -13,4 +19,11 @@ export default function Home() {
       <Navbar />
     </>
   );
+}
+
+export async function getStaticProps() {
+  const popularMovies = await fetchData(
+    `/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
+  );
+  return { props: { popularMovies } };
 }
