@@ -4,6 +4,7 @@ import { fetchData } from "@/services/http";
 import { Cover } from "@/components/Cover";
 import { MovieResponseType } from "@/types/movie";
 import { GetStaticProps } from "next";
+import { Carousel } from "@/components/Carousel";
 
 interface HomeProps {
   popularMovies: MovieResponseType;
@@ -26,6 +27,7 @@ export default function Home(props: HomeProps): JSX.Element {
         title={popularMovies.results[0].title}
         overview={popularMovies.results[0].overview}
       />
+      <Carousel data={popularMovies.results} heading={"Trending now"} />
     </>
   );
 }
