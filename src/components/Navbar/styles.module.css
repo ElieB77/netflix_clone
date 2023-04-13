@@ -3,6 +3,16 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 50px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--main-bg);
+  z-index: 1999;
+  transition: all 1s ease;
+}
+.navbar__on_scroll {
+  background-color: inherit;
 }
 .navbar__left {
   display: flex;
@@ -19,6 +29,10 @@
 }
 .navbar__link:hover {
   color: var(--tertiary-light);
+}
+.active__link {
+  font-family: "Roboto Bold", sans-serif;
+  pointer-events: none;
 }
 .navbar__icons {
   display: flex;

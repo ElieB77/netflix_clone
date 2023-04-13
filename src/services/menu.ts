@@ -4,7 +4,7 @@ export const menu: MenuType = {
   links: [
     {
       content: "Home",
-      href: "/home",
+      href: "/",
       id: "0",
     },
     {
