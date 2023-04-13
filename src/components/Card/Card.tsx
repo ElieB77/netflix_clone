@@ -6,7 +6,7 @@ interface CardProps {
   poster_path: string;
 }
 
-export const Card = (props: CardProps) => {
+export const Card = (props: CardProps): JSX.Element => {
   return (
     <>
       <div className={styles.card}>

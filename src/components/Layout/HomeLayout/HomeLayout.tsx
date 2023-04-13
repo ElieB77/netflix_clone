@@ -1,5 +1,6 @@
 import { Carousel } from "@/components/Carousel";
 import { Cover } from "@/components/Cover";
+import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import styles from "./styles.module.css";
 
@@ -14,7 +15,7 @@ interface HomeLayoutProps {
   topRatedMovies: any;
 }
 
-export const HomeLayout = (props: HomeLayoutProps) => {
+export const HomeLayout = (props: HomeLayoutProps): JSX.Element => {
   const {
     coverImage,
     coverTitle,
@@ -40,6 +41,8 @@ export const HomeLayout = (props: HomeLayoutProps) => {
         <Carousel data={topRatedTVShows} heading={"Top-rated TV Shows"} />
         <Carousel data={topRatedMovies} heading={"Top-rated movies"} />
       </div>
+
+      <Footer />
     </>
   );
 };
