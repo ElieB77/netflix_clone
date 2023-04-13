@@ -6,8 +6,8 @@
 }
 
 .header__progress {
-  width: 100px;
   display: flex;
+  width: 1000px;
   gap: 2px;
   justify-content: flex-end;
   margin-right: 5rem;
@@ -25,11 +25,13 @@
 
 .carousel {
   position: relative;
-  position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 .carousel:hover .carousel__button {
   display: block;
+}
+.carousel:hover ~ .header__progress {
+  display: none;
 }
 
 .carousel__button {

@@ -23,9 +23,9 @@ export default function Home(props: HomeProps): JSX.Element {
       </Head>
       <Navbar />
       <Cover
-        poster_path={popularMovies.results[0].poster_path}
-        title={popularMovies.results[0].title}
-        overview={popularMovies.results[0].overview}
+        poster_path={popularMovies.results[3].poster_path}
+        title={popularMovies.results[3].title}
+        overview={popularMovies.results[3].overview}
       />
       <Carousel data={popularMovies.results} heading={"Trending now"} />
     </>

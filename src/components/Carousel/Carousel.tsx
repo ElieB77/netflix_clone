@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { useState } from "react";
+import { Card } from "../Card";
 
 interface CarouselProps {
   data?: any;
@@ -79,11 +80,9 @@ export const Carousel = (props: CarouselProps): JSX.Element => {
           >
             {props.data.map((movie: any) => {
               return (
-                <img
+                <Card
                   key={movie.id}
-                  className={styles.movie_image}
-                  src={`${process.env.NEXT_PUBLIC_IMAGE_PATH}${movie.poster_path}`}
-                  alt="movie"
+                  poster_path={`${process.env.NEXT_PUBLIC_IMAGE_PATH}${movie.poster_path}`}
                 />
               );
             })}
