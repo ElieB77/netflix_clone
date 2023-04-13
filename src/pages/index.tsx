@@ -5,13 +5,24 @@ import { Cover } from "@/components/Cover";
 import { MovieResponseType } from "@/types/movie";
 import { GetStaticProps } from "next";
 import { Carousel } from "@/components/Carousel";
+import { HomeLayout } from "@/components/Layout/HomeLayout";
 
 interface HomeProps {
   popularMovies: MovieResponseType;
+  trendingMedia: MovieResponseType;
+  popularTVShows: MovieResponseType;
+  topRatedTVShows: MovieResponseType;
+  topRatedMovies: MovieResponseType;
 }
 
 export default function Home(props: HomeProps): JSX.Element {
-  const { popularMovies } = props;
+  const {
+    popularMovies,
+    trendingMedia,
+    popularTVShows,
+    topRatedTVShows,
+    topRatedMovies,
+  } = props;
 
   return (
     <>
@@ -21,13 +32,16 @@ export default function Home(props: HomeProps): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
-      <Cover
-        poster_path={popularMovies.results[3].poster_path}
-        title={popularMovies.results[3].title}
-        overview={popularMovies.results[3].overview}
+      <HomeLayout
+        coverImage={popularMovies.results[3].poster_path}
+        coverTitle={popularMovies.results[3].title}
+        coverOverview={popularMovies.results[3].overview}
+        trendingMedia={trendingMedia.results}
+        popularMovies={popularMovies.results}
+        popularTVShows={popularTVShows.results}
+        topRatedTVShows={topRatedTVShows.results}
+        topRatedMovies={topRatedMovies.results}
       />
-      <Carousel data={popularMovies.results} heading={"Trending now"} />
     </>
   );
 }
@@ -36,6 +50,26 @@ export const getStaticProps: GetStaticProps = async () => {
   const popularMovies: MovieResponseType = await fetchData(
     `/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
   );
+  const trendingMedia: MovieResponseType = await fetchData(
+    `/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
+  );
+  const popularTVShows: MovieResponseType = await fetchData(
+    `/tv/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
+  );
+  const topRatedTVShows: MovieResponseType = await fetchData(
+    `/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
+  );
+  const topRatedMovies: MovieResponseType = await fetchData(
+    `/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
+  );
 
-  return { props: { popularMovies } };
+  return {
+    props: {
+      popularMovies,
+      trendingMedia,
+      popularTVShows,
+      topRatedTVShows,
+      topRatedMovies,
+    },
+  };
 };

@@ -29,24 +29,24 @@ export const Carousel = (props: CarouselProps): JSX.Element => {
 
   return (
     <>
-      <div className={styles.header}>
-        <h2 className={styles.header__title}>{props.heading}</h2>
-        <div className={styles.header__progress}>
-          {Array(4)
-            .fill(null)
-            .map((_, i: number) => {
-              return (
-                <div
-                  key={i}
-                  className={`${styles.header__progress_index} ${
-                    index === i ? styles.active__index : ""
-                  }`}
-                ></div>
-              );
-            })}
-        </div>
-      </div>
       <div className={styles.carousel}>
+        <div className={styles.carousel__header}>
+          <h2 className={styles.carousel__header_title}>{props.heading}</h2>
+          <div className={styles.carousel__header_progress}>
+            {Array(4)
+              .fill(null)
+              .map((_, i: number) => {
+                return (
+                  <div
+                    key={i}
+                    className={`${styles.carousel__header_progress_index} ${
+                      index === i ? styles.active__index : ""
+                    }`}
+                  ></div>
+                );
+              })}
+          </div>
+        </div>
         {index > 0 && (
           <button
             className={`${styles.carousel__button} ${styles.carousel__button_left}`}
