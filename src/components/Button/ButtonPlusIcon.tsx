@@ -19,6 +19,7 @@ export const ButtonPlusIcon = (props: ButtonPlusIconProps): JSX.Element => {
       className={`${styles.button} ${
         isTransparent ? styles.button__transparent : ""
       } button`}
+      {...props}
     >
       <Image
         className={isTransparent ? styles.button__icon_transparent : ""}

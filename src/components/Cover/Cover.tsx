@@ -6,10 +6,11 @@ export interface CoverProps {
   poster_path: string;
   title: string;
   overview: string;
+  handleClickMoreInfoButton: any;
 }
 
 export const Cover = (props: CoverProps): JSX.Element => {
-  const { poster_path, title, overview } = props;
+  const { poster_path, title, overview, handleClickMoreInfoButton } = props;
   return (
     <div className={styles.container}>
       <div className={styles.cover}>
@@ -31,6 +32,7 @@ export const Cover = (props: CoverProps): JSX.Element => {
             iconAlt="Play icon"
           />
           <ButtonPlusIcon
+            onClick={handleClickMoreInfoButton}
             content="More info"
             iconSrc="/images/circle-info-solid.svg"
             isTransparent

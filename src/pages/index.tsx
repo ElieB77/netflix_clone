@@ -1,10 +1,7 @@
 import Head from "next/head";
-import { Navbar } from "@/components/Navbar";
 import { fetchData } from "@/services/http";
-import { Cover } from "@/components/Cover";
 import { MovieResponseType } from "@/types/movie";
 import { GetStaticProps } from "next";
-import { Carousel } from "@/components/Carousel";
 import { HomeLayout } from "@/components/Layout/HomeLayout";
 
 interface HomeProps {
@@ -33,9 +30,9 @@ export default function Home(props: HomeProps): JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeLayout
-        coverImage={popularMovies.results[3].poster_path}
-        coverTitle={popularMovies.results[3].title}
-        coverOverview={popularMovies.results[3].overview}
+        coverImage={popularMovies.results[1].poster_path}
+        coverTitle={popularMovies.results[1].title}
+        coverOverview={popularMovies.results[1].overview}
         trendingMedia={trendingMedia.results}
         popularMovies={popularMovies.results}
         popularTVShows={popularTVShows.results}
