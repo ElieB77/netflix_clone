@@ -5,6 +5,7 @@ import { Modal } from "@/components/Modal";
 import { Navbar } from "@/components/Navbar";
 import { MovieResponseType } from "@/types/movie";
 import { useState } from "react";
+import { ModalInfoLayout } from "../ModalInfoLayout";
 import styles from "./styles.module.css";
 
 interface HomeLayoutProps {
@@ -40,14 +41,21 @@ export const HomeLayout = (props: HomeLayoutProps): JSX.Element => {
         handleClickMoreInfoButton={() => setShowModal(true)}
       />
       <div className={styles.carousel__container}>
-        <Carousel data={trendingMedia} heading={"Trending now"} />
-        <Carousel data={popularMovies} heading={"Popular movies"} />
-        <Carousel data={popularTVShows} heading={"Popular TV Shows"} />
-        <Carousel data={topRatedTVShows} heading={"Top-rated TV Shows"} />
-        <Carousel data={topRatedMovies} heading={"Top-rated movies"} />
+        <Carousel data={trendingMedia.results} heading={"Trending now"} />
+        <Carousel data={popularMovies.results} heading={"Popular movies"} />
+        <Carousel data={popularTVShows.results} heading={"Popular TV Shows"} />
+        <Carousel
+          data={topRatedTVShows.results}
+          heading={"Top-rated TV Shows"}
+        />
+        <Carousel data={topRatedMovies.results} heading={"Top-rated movies"} />
       </div>
 
-      <Modal isActive={showModal} onClick={() => setShowModal(!showModal)} />
+      <Modal
+        isActive={showModal}
+        onClick={() => setShowModal(!showModal)}
+        content={<ModalInfoLayout isMounted={showModal} />}
+      />
 
       <Footer />
     </>

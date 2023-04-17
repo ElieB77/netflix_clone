@@ -33,11 +33,11 @@ export default function Home(props: HomeProps): JSX.Element {
         coverImage={popularMovies.results[1].poster_path}
         coverTitle={popularMovies.results[1].title}
         coverOverview={popularMovies.results[1].overview}
-        trendingMedia={trendingMedia.results}
-        popularMovies={popularMovies.results}
-        popularTVShows={popularTVShows.results}
-        topRatedTVShows={topRatedTVShows.results}
-        topRatedMovies={topRatedMovies.results}
+        trendingMedia={trendingMedia}
+        popularMovies={popularMovies}
+        popularTVShows={popularTVShows}
+        topRatedTVShows={topRatedTVShows}
+        topRatedMovies={topRatedMovies}
       />
     </>
   );

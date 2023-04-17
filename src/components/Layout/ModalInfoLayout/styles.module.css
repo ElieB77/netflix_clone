@@ -1,0 +1,23 @@
+.modal__info {
+  width: 850px;
+  padding-bottom: 2rem;
+}
+
+.modal__info_details {
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal__info_details_left span {
+  margin-right: 1rem;
+}
+
+.modal__info_details_right span {
+  color: var(--secondary-dark);
+}
+
+.modal__info_overview {
+  padding: 0 3rem;
+  width: 500px;
+}
