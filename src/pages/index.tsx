@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { fetchData } from "@/services/http";
-import { MovieResponseType } from "@/types/movie";
+import { MovieResponseType } from "@/types/media";
 import { GetStaticProps } from "next";
 import { HomeLayout } from "@/components/Layout/HomeLayout";
 

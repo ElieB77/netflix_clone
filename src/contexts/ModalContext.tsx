@@ -16,7 +16,7 @@ interface ModalContext {
   openModal: any;
   closeModal: () => void;
   mediaData: any;
-  isMovie: boolean;
+  isMediaMovie: boolean;
 }
 
 const ModalContext = createContext({} as ModalContext);
@@ -29,24 +29,24 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [mediaId, setMediaId] = useState<number>();
   const [mediaData, setMediaData] = useState<any>();
-  const [isMovie, setIsMovie] = useState<boolean>(false);
+  const [isMediaMovie, setIsMediaMovie] = useState<boolean>(false);
 
   useEffect(() => {
     const loadData = async () => {
       const findById: any = await fetchData(
-        `/${isMovie ? "movie" : "tv"}/${mediaId}?api_key=${
+        `/${isMediaMovie ? "movie" : "tv"}/${mediaId}?api_key=${
           process.env.NEXT_PUBLIC_API_KEY
         }&language=en-US&external_source=imdb_id&append_to_response=videos,credits`
       );
       setMediaData(findById);
     };
     loadData();
-  }, [mediaId, isMovie]);
+  }, [mediaId, isMediaMovie]);
 
   const openModal = (id: number, movie: boolean) => {
     setMediaId(id);
     setIsOpen(true);
-    setIsMovie(movie);
+    setIsMediaMovie(movie);
   };
   const closeModal = () => setIsOpen(false);
 
@@ -57,7 +57,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
         openModal,
         closeModal,
         mediaData,
-        isMovie,
+        isMediaMovie,
       }}
     >
       {children}

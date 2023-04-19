@@ -3,7 +3,7 @@ import { Cover } from "@/components/Cover";
 import { Footer } from "@/components/Footer";
 import { Modal } from "@/components/Modal";
 import { Navbar } from "@/components/Navbar";
-import { MovieResponseType } from "@/types/movie";
+import { MovieResponseType } from "@/types/media";
 import { useState } from "react";
 import { ModalInfoLayout } from "../ModalInfoLayout";
 import styles from "./styles.module.css";
