@@ -2,6 +2,7 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import { useState } from "react";
 import { Card } from "../Card";
+import { useModal } from "@/contexts";
 
 interface CarouselProps {
   data?: any;
@@ -9,6 +10,7 @@ interface CarouselProps {
 }
 
 export const Carousel = (props: CarouselProps): JSX.Element => {
+  const { openModal } = useModal();
   const [index, setIndex] = useState<number>(0);
   const [value, setValue] = useState<number>(0);
 
@@ -78,11 +80,17 @@ export const Carousel = (props: CarouselProps): JSX.Element => {
             className={styles.movie}
             style={{ transform: `translateX(${String(value)}%` }}
           >
-            {props.data.map((movie: any) => {
+            {props.data.map((media: any) => {
               return (
                 <Card
-                  key={movie.id}
-                  poster_path={`${process.env.NEXT_PUBLIC_IMAGE_PATH}${movie.poster_path}`}
+                  onClick={() => {
+                    openModal(
+                      media.id,
+                      media.hasOwnProperty("first_air_date") ? false : true
+                    );
+                  }}
+                  key={media.id}
+                  poster_path={`${process.env.NEXT_PUBLIC_IMAGE_PATH}${media.poster_path}`}
                 />
               );
             })}

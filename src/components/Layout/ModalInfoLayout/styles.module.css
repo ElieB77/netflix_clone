@@ -3,6 +3,28 @@
   padding-bottom: 2rem;
 }
 
+.modal__info_video {
+  position: relative;
+}
+
+.modal__info_video_volume {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 4rem;
+  right: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__info_video_volume:focus {
+  outline: solid 2px var(--primary-light);
+}
+
 .modal__info_details {
   padding: 1rem 3rem;
   display: flex;
@@ -15,6 +37,13 @@
 
 .modal__info_details_right span {
   color: var(--secondary-dark);
+}
+
+.modal__info_details_right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 40%;
 }
 
 .modal__info_overview {

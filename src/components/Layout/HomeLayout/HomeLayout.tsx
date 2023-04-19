@@ -7,26 +7,30 @@ import { MovieResponseType } from "@/types/movie";
 import { useState } from "react";
 import { ModalInfoLayout } from "../ModalInfoLayout";
 import styles from "./styles.module.css";
+import { useModal } from "@/contexts";
 
 interface HomeLayoutProps {
+  coverId: number;
   coverImage: string;
   coverTitle: string;
   coverOverview: string;
   trendingMedia: MovieResponseType;
   popularMovies: MovieResponseType;
-  popularTVShows: MovieResponseType;
+  latestTVShows: MovieResponseType;
   topRatedTVShows: MovieResponseType;
   topRatedMovies: MovieResponseType;
 }
 
 export const HomeLayout = (props: HomeLayoutProps): JSX.Element => {
+  const { isOpen, closeModal, openModal } = useModal();
   const {
+    coverId,
     coverImage,
     coverTitle,
     coverOverview,
     trendingMedia,
     popularMovies,
-    popularTVShows,
+    latestTVShows,
     topRatedTVShows,
     topRatedMovies,
   } = props;
@@ -38,12 +42,12 @@ export const HomeLayout = (props: HomeLayoutProps): JSX.Element => {
         poster_path={coverImage}
         title={coverTitle}
         overview={coverOverview}
-        handleClickMoreInfoButton={() => setShowModal(true)}
+        handleClickMoreInfoButton={() => openModal(coverId)}
       />
       <div className={styles.carousel__container}>
         <Carousel data={trendingMedia.results} heading={"Trending now"} />
         <Carousel data={popularMovies.results} heading={"Popular movies"} />
-        <Carousel data={popularTVShows.results} heading={"Popular TV Shows"} />
+        <Carousel data={latestTVShows.results} heading={"Popular TV Shows"} />
         <Carousel
           data={topRatedTVShows.results}
           heading={"Top-rated TV Shows"}
@@ -52,8 +56,8 @@ export const HomeLayout = (props: HomeLayoutProps): JSX.Element => {
       </div>
 
       <Modal
-        isActive={showModal}
-        onClick={() => setShowModal(!showModal)}
+        isActive={isOpen}
+        onClick={closeModal}
         content={<ModalInfoLayout isMounted={showModal} />}
       />
 

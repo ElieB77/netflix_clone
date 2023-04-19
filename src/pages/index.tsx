@@ -7,7 +7,7 @@ import { HomeLayout } from "@/components/Layout/HomeLayout";
 interface HomeProps {
   popularMovies: MovieResponseType;
   trendingMedia: MovieResponseType;
-  popularTVShows: MovieResponseType;
+  latestTVShows: MovieResponseType;
   topRatedTVShows: MovieResponseType;
   topRatedMovies: MovieResponseType;
 }
@@ -16,7 +16,7 @@ export default function Home(props: HomeProps): JSX.Element {
   const {
     popularMovies,
     trendingMedia,
-    popularTVShows,
+    latestTVShows,
     topRatedTVShows,
     topRatedMovies,
   } = props;
@@ -30,12 +30,13 @@ export default function Home(props: HomeProps): JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeLayout
-        coverImage={popularMovies.results[1].poster_path}
-        coverTitle={popularMovies.results[1].title}
-        coverOverview={popularMovies.results[1].overview}
+        coverId={popularMovies.results[0].id}
+        coverImage={popularMovies.results[0].poster_path}
+        coverTitle={popularMovies.results[0].title}
+        coverOverview={popularMovies.results[0].overview}
         trendingMedia={trendingMedia}
         popularMovies={popularMovies}
-        popularTVShows={popularTVShows}
+        latestTVShows={latestTVShows}
         topRatedTVShows={topRatedTVShows}
         topRatedMovies={topRatedMovies}
       />
@@ -50,8 +51,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const trendingMedia: MovieResponseType = await fetchData(
     `/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
   );
-  const popularTVShows: MovieResponseType = await fetchData(
-    `/tv/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
+  const latestTVShows: MovieResponseType = await fetchData(
+    `/tv/on_the_air?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
   );
   const topRatedTVShows: MovieResponseType = await fetchData(
     `/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
@@ -64,7 +65,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       popularMovies,
       trendingMedia,
-      popularTVShows,
+      latestTVShows,
       topRatedTVShows,
       topRatedMovies,
     },
