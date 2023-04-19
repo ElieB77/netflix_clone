@@ -8,21 +8,6 @@ export const menu: MenuType = {
       id: "0",
     },
     {
-      content: "Shows",
-      href: "/shows",
-      id: "1",
-    },
-    {
-      content: "Movies",
-      href: "/movies",
-      id: "2",
-    },
-    {
-      content: "Latest",
-      href: "/latest",
-      id: "3",
-    },
-    {
       content: "My List",
       href: "/mylist",
       id: "4",

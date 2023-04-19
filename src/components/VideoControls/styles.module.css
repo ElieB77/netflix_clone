@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 3rem;
+}
+
+.container__button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-color: transparent;
+}
+
+.container__button:focus {
+  outline: solid 2px var(--primaty-light);
+}
+
+.container__button:hover {
+  opacity: 1;
+  outline: solid 2px var(--primary-light);
+}
+
+.container__button img {
+  filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(192deg)
+    brightness(109%) contrast(101%);
+}
+
+.container__grouped_buttons {
+  display: flex;
+  gap: 0.8rem;
+}
+.container__grouped_buttons button {
+}
+
+.container__button_volume {
+  opacity: 0.5;
+}

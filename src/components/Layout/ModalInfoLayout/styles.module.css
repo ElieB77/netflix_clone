@@ -7,22 +7,10 @@
   position: relative;
 }
 
-.modal__info_video_volume {
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  border: none;
-  cursor: pointer;
+.modal__info_video_controls {
   position: absolute;
   bottom: 4rem;
-  right: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal__info_video_volume:focus {
-  outline: solid 2px var(--primary-light);
+  width: 100%;
 }
 
 .modal__info_details {

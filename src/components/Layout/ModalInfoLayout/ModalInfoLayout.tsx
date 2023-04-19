@@ -4,6 +4,7 @@ import ReactPlayer from "react-player";
 import styles from "./styles.module.css";
 import { useModal } from "@/contexts";
 import Image from "next/image";
+import { VideoControls } from "@/components/VideoControls";
 
 interface ModalInfoLayoutProps {
   isMounted: boolean;
@@ -68,7 +69,7 @@ export const ModalInfoLayout = (props: ModalInfoLayoutProps): JSX.Element => {
           }}
           url={`https://www.youtube.com/watch?v=${videoUrl}`}
         />
-        <button
+        {/* <button
           className={styles.modal__info_video_volume}
           onClick={() => setIsMuted(!isMuted)}
         >
@@ -82,7 +83,13 @@ export const ModalInfoLayout = (props: ModalInfoLayoutProps): JSX.Element => {
             width={20}
             height={20}
           />
-        </button>
+        </button> */}
+        <div className={styles.modal__info_video_controls}>
+          <VideoControls
+            isMuted={isMuted}
+            handleVolume={() => setIsMuted(!isMuted)}
+          />
+        </div>
       </div>
       <div className={styles.modal__info_details}>
         <div className={styles.modal__info_details_left}>
