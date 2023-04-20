@@ -44,7 +44,7 @@ export const HomeLayout = (props: HomeLayoutProps): JSX.Element => {
         poster_path={coverImage}
         title={coverTitle}
         overview={coverOverview}
-        handleClickMoreInfoButton={() => openModal(coverId)}
+        handleClickMoreInfoButton={() => openModal(coverId, true)}
       />
       <div className={styles.carousel__container}>
         <Carousel data={trendingMedia.results} heading={"Trending now"} />
