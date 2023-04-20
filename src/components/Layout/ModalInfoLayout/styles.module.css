@@ -23,6 +23,29 @@
   margin-right: 1rem;
 }
 
+.modal__info_details_left_vote {
+  display: inline-flex;
+  color: var(--success-color);
+  border: solid 2px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+
+.medium__rating {
+  color: yellow;
+}
+
+.low__rating {
+  color: var(--warning-color);
+}
+
+.modal__info_details_left_vote span {
+  margin: 0;
+}
+
 .modal__info_details_right span {
   color: var(--secondary-dark);
 }

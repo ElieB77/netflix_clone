@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import styles from "./styles.module.css";
 
 interface CardProps {
@@ -7,16 +9,25 @@ interface CardProps {
   onClick: React.MouseEventHandler;
 }
 
-export const Card = (props: CardProps): JSX.Element => {
+export const Card = ({ onClick, poster_path }: CardProps): JSX.Element => {
   return (
     <>
-      <div className={styles.card} onClick={props.onClick}>
-        <img
-          className={styles.card__image}
-          src={props.poster_path}
-          alt="card"
-        />
-      </div>
+      <Suspense
+        fallback={
+          <Skeleton
+            baseColor={"#444"}
+            highlightColor={"#fff"}
+            width={100}
+            height={100}
+            enableAnimation={true}
+            duration={2}
+          />
+        }
+      >
+        <div className={styles.card} onClick={onClick}>
+          <img className={styles.card__image} src={poster_path} alt="card" />
+        </div>
+      </Suspense>
     </>
   );
 };

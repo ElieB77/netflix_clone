@@ -34,7 +34,9 @@ export const HomeLayout = (props: HomeLayoutProps): JSX.Element => {
     topRatedTVShows,
     topRatedMovies,
   } = props;
+
   const [showModal, setShowModal] = useState<boolean>(false);
+
   return (
     <>
       <Navbar />

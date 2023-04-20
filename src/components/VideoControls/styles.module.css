@@ -16,6 +16,7 @@
   align-items: center;
   flex-direction: row;
   background-color: transparent;
+  outline: solid 2px var(--secondary-dark);
 }
 
 .container__button:focus {
@@ -35,8 +36,6 @@
 .container__grouped_buttons {
   display: flex;
   gap: 0.8rem;
-}
-.container__grouped_buttons button {
 }
 
 .container__button_volume {

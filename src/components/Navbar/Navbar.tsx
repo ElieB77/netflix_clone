@@ -9,17 +9,18 @@ import { useRouter } from "next/router";
 export const Navbar = (): JSX.Element => {
   const router = useRouter();
   const [scrollPosition, setScrollPosition] = useState<number>(0);
+  const { logo, links, icons } = menu;
 
-  const handleScroll = () => {
+  const onScroll = () => {
     const position = window.scrollY;
     setScrollPosition(position);
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
@@ -30,16 +31,16 @@ export const Navbar = (): JSX.Element => {
       }`}
     >
       <div className={styles.navbar__left}>
-        <Link href={menu.logo.href}>
+        <Link href={logo.href}>
           <Image
-            src={menu.logo.src}
-            width={menu.logo.width}
-            height={menu.logo.height}
-            alt={menu.logo.alt}
+            src={logo.src}
+            width={logo.width}
+            height={logo.height}
+            alt={logo.alt}
           />
         </Link>
         <ul className={styles.navbar__links}>
-          {menu.links.map((link: LinkType) => {
+          {links.map((link: LinkType) => {
             const { content, href, id } = link;
             return (
               <Link
@@ -56,7 +57,7 @@ export const Navbar = (): JSX.Element => {
         </ul>
       </div>
       <div className={styles.navbar__icons}>
-        {menu.icons.map((icon: IconType) => {
+        {icons.map((icon: IconType) => {
           const { src, width, height, alt, id } = icon;
           return (
             <Image

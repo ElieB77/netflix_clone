@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Card } from "../Card";
 import { useModal } from "@/contexts";
+import { MovieResponseType } from "@/types/media";
 
 interface CarouselProps {
   data?: any;
@@ -90,7 +91,11 @@ export const Carousel = (props: CarouselProps): JSX.Element => {
                     );
                   }}
                   key={media.id}
-                  poster_path={`${process.env.NEXT_PUBLIC_IMAGE_PATH}${media.poster_path}`}
+                  poster_path={
+                    media.poster_path
+                      ? `${process.env.NEXT_PUBLIC_IMAGE_PATH}${media.poster_path}`
+                      : "/images/default-poster.svg"
+                  }
                 />
               );
             })}

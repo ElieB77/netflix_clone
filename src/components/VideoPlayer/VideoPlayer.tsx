@@ -1,13 +1,19 @@
+/* eslint-disable @next/next/no-img-element */
 import ReactPlayer from "react-player";
+import styles from "./styles.module.css";
 
 interface VideoPlayerProps {
   isMuted: boolean;
   videoUrl: string;
+  poster_path?: string;
 }
 
-export const VideoPlayer = (props: VideoPlayerProps): JSX.Element => {
-  const { isMuted, videoUrl } = props;
-  return (
+export const VideoPlayer = ({
+  isMuted,
+  videoUrl,
+  poster_path,
+}: VideoPlayerProps): JSX.Element => {
+  return videoUrl ? (
     <ReactPlayer
       volume={1}
       muted={isMuted}
@@ -25,5 +31,9 @@ export const VideoPlayer = (props: VideoPlayerProps): JSX.Element => {
       }}
       url={`https://www.youtube.com/watch?v=${videoUrl}`}
     />
+  ) : (
+    <div className={styles.poster__fallback}>
+      <img src={poster_path} alt="Media Poster" />
+    </div>
   );
 };

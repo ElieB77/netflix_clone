@@ -1,6 +1,19 @@
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 1999;
+  display: none;
+}
+
+.active__overlay {
+  display: block;
+}
+
 .modal {
-  /* width: 500px; */
-  /* height: 500px; */
   background-color: var(--main-bg);
   position: fixed;
   top: 2em;

@@ -1,0 +1,9 @@
+.poster__fallback {
+  height: 360px;
+  width: 100%;
+}
+.poster__fallback img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

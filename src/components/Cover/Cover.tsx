@@ -6,7 +6,7 @@ export interface CoverProps {
   poster_path: string;
   title: string;
   overview: string;
-  handleClickMoreInfoButton: any;
+  handleClickMoreInfoButton: React.MouseEventHandler;
 }
 
 export const Cover = (props: CoverProps): JSX.Element => {
