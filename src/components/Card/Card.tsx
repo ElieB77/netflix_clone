@@ -5,11 +5,11 @@ import "react-loading-skeleton/dist/skeleton.css";
 import styles from "./styles.module.css";
 
 interface CardProps {
-  poster_path: string;
+  posterPath: string;
   onClick: React.MouseEventHandler;
 }
 
-export const Card = ({ onClick, poster_path }: CardProps): JSX.Element => {
+export const Card = ({ onClick, posterPath }: CardProps): JSX.Element => {
   return (
     <>
       <Suspense
@@ -25,7 +25,7 @@ export const Card = ({ onClick, poster_path }: CardProps): JSX.Element => {
         }
       >
         <div className={styles.card} onClick={onClick}>
-          <img className={styles.card__image} src={poster_path} alt="card" />
+          <img className={styles.card__image} src={posterPath} alt="card" />
         </div>
       </Suspense>
     </>

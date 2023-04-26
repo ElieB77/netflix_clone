@@ -91,7 +91,7 @@ export const Carousel = (props: CarouselProps): JSX.Element => {
                     );
                   }}
                   key={media.id}
-                  poster_path={
+                  posterPath={
                     media.poster_path
                       ? `${process.env.NEXT_PUBLIC_IMAGE_PATH}${media.poster_path}`
                       : "/images/default-poster.svg"

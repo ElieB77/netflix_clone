@@ -1,47 +1,54 @@
 import styles from "./styles.module.css";
 import Image from "next/image";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 
 export const SearchBar = (): JSX.Element => {
-  const [isActive, setIsActive] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>("");
-  const target = useRef<any>();
+  const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const target = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
+  const clearSearchValue = () => {
+    return setSearchQuery("");
+  };
+
+  const handleClickOutside = (
+    e: MouseEvent,
+    target: RefObject<HTMLDivElement>
+  ) => {
+    if (target.current && !target.current.contains(e.target as Node)) {
+      setIsSearchActive(false);
+    }
+  };
+
   useEffect(() => {
-    document.addEventListener("mousedown", (e) => {
-      if (target?.current && !target.current.contains(e.target)) {
-        setIsActive(false);
-      }
-    });
+    const handleMouseDown = (e: MouseEvent) => handleClickOutside(e, target);
+
+    document.addEventListener("mousedown", handleMouseDown);
 
     return () => {
-      document.removeEventListener("mousedown", (e) => {
-        if (target?.current && !target.current.contains(e.target)) {
-          setIsActive(false);
-        }
-      });
+      document.removeEventListener("mousedown", handleMouseDown);
     };
-  }, [target, inputValue]);
+  }, [target]);
 
   useEffect(() => {
-    if (Boolean(inputValue)) {
+    if (searchQuery) {
       router.push({
         query: {
-          query: inputValue.toLowerCase(),
+          query: searchQuery.toLowerCase(),
         },
       });
     } else {
       router.replace("/", undefined, { shallow: true });
     }
-  }, [inputValue]);
+  }, [searchQuery]);
 
   return (
     <div className={styles.search__bar} ref={target}>
       <div
         className={`${styles.search__bar_input} ${
-          isActive ? styles.active : ""
+          isSearchActive ? styles.active : ""
         }`}
       >
         <Image
@@ -52,11 +59,12 @@ export const SearchBar = (): JSX.Element => {
           alt={"Search icon"}
         />
         <input
+          value={searchQuery}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setInputValue(e.target.value)
+            setSearchQuery(e.target.value)
           }
           type="text"
-          placeholder="Search for a movie, tv show, person..."
+          placeholder="Search for a movie, tv show..."
           autoFocus={true}
         />
         <Image
@@ -65,11 +73,14 @@ export const SearchBar = (): JSX.Element => {
           width={20}
           height={20}
           alt={"Delete icon"}
+          onClick={clearSearchValue}
         />
       </div>
       <Image
-        onClick={() => setIsActive(true)}
-        className={`${styles.search__bar_icon} ${isActive ? styles.hide : ""}`}
+        onClick={() => setIsSearchActive(true)}
+        className={`${styles.search__bar_icon} ${
+          isSearchActive ? styles.hide : ""
+        }`}
         src={"/images/magnifying-glass.svg"}
         width={20}
         height={20}

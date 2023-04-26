@@ -1,41 +1,45 @@
 import { Card } from "@/components/Card";
 import styles from "./styles.module.css";
-import { useModal, useSearch } from "@/contexts";
+import { useModal } from "@/contexts";
 import { Modal } from "@/components/Modal";
 import { ModalInfoLayout } from "../ModalInfoLayout";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { MovieResponseType } from "@/types/media";
+import { MovieResponseType, MovieType } from "@/types/media";
 import { fetchData } from "@/services/http";
+import { CircularProgress } from "@/components/CircularProgress";
+
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const IMAGE_PATH = process.env.NEXT_PUBLIC_IMAGE_PATH;
 
 export const SearchLayout = () => {
   const router = useRouter();
   const { openModal, isOpen, closeModal } = useModal();
-  const [searchData, setSearchData] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<MovieResponseType[]>([]);
   const [pageCount, setPageCount] = useState<number>(1);
-  const [hasMoreData, setHasMoreData] = useState<boolean>(false);
-
-  console.log("modal", isOpen);
+  const [totalPages, setTotalPages] = useState<number>(0);
 
   useEffect(() => {
-    const loadData = async () => {
-      const searchResults: any =
-        router.query.query &&
-        (await fetchData(
-          `/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${router.query.query}&language=en-US&page=${pageCount}&adult=false`
-        ));
-      if (searchResults) {
-        setSearchData((prevData: MovieResponseType[]) => [
+    const fetchSearchResults = async () => {
+      const searchQuery = router.query.query;
+      if (!searchQuery) return;
+
+      const results: any = await fetchData(
+        `/search/movie?api_key=${API_KEY}&adult=false&query=${searchQuery}&language=en-US&page=${pageCount}`
+      );
+
+      if (results?.results) {
+        setSearchResults((prevData: MovieResponseType[]) => [
           ...prevData,
-          ...searchResults.results,
+          ...results.results,
         ]);
+        setTotalPages(results.total_pages);
       }
     };
-    loadData();
-  }, [pageCount]);
+    fetchSearchResults();
+  }, [pageCount, router.query.query]);
 
-  console.log(searchData);
   return (
     <>
       <div className={styles.container}>
@@ -43,18 +47,23 @@ export const SearchLayout = () => {
           next={() => {
             setPageCount((prevCount) => prevCount + 1);
           }}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
-          dataLength={searchData.length}
+          hasMore={pageCount < totalPages}
+          loader={
+            <div className={styles.loader__wrapper}>
+              <CircularProgress />
+            </div>
+          }
+          dataLength={searchResults.length}
+          scrollThreshold={1}
         >
-          {searchData &&
-            searchData.map((media: any, index: number) => {
+          {searchResults &&
+            searchResults.map((media: any) => {
               return (
                 <Card
-                  key={index}
-                  poster_path={
+                  key={media.id}
+                  posterPath={
                     media.poster_path
-                      ? `${process.env.NEXT_PUBLIC_IMAGE_PATH}${media.poster_path}`
+                      ? `${IMAGE_PATH}${media.poster_path}`
                       : "/images/default-poster.svg"
                   }
                   onClick={() => {
@@ -71,7 +80,7 @@ export const SearchLayout = () => {
       <Modal
         isActive={isOpen}
         onClick={closeModal}
-        content={<ModalInfoLayout isMounted={isOpen} />}
+        content={<ModalInfoLayout />}
       />
     </>
   );
