@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { useModal } from "@/contexts";
 import { VideoControls } from "@/components/VideoControls";
@@ -15,13 +15,15 @@ import {
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-interface ModalInfoLayoutProps {
-  isMounted: boolean;
-}
-
-export const ModalInfoLayout = (props: ModalInfoLayoutProps): JSX.Element => {
-  const { mediaData, isMediaMovie } = useModal();
+export const ModalInfoLayout = (): JSX.Element => {
+  const { mediaData, isMediaMovie, isOpen } = useModal();
   const [isMuted, setIsMuted] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setIsMuted(true);
+    }
+  }, [isOpen]);
 
   return (
     <div className={styles.modal__info}>
@@ -35,6 +37,7 @@ export const ModalInfoLayout = (props: ModalInfoLayoutProps): JSX.Element => {
                 ? `${process.env.NEXT_PUBLIC_IMAGE_PATH}${mediaData?.poster_path}`
                 : "/images/default-poster.svg"
             }
+            isPlaying={isOpen}
           />
           <div className={styles.modal__info_video_controls}>
             <VideoControls
@@ -77,7 +80,9 @@ export const ModalInfoLayout = (props: ModalInfoLayoutProps): JSX.Element => {
           </div>
         </div>
       </div>
+
       <p className={styles.modal__info_overview}>
+        <span>Overview </span>
         {mediaData?.overview ||
           "We don't have an overview translated in English. Help us expand our database by adding one."}
       </p>

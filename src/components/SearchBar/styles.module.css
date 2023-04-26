@@ -1,0 +1,39 @@
+.search__bar_icon {
+  filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(192deg)
+    brightness(109%) contrast(101%);
+  cursor: pointer;
+}
+
+.search__bar_input {
+  border: solid 1px var(--primary-light);
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+  width: 0;
+  padding: 0;
+  transition: all 0.5 ease;
+}
+
+.search__bar_input input {
+  color: var(--primary-light);
+  background-color: var(--primary-dark);
+  border: none;
+  outline: none;
+  width: 200px;
+}
+
+.hide {
+  display: none;
+}
+
+.active {
+  opacity: 1;
+  height: unset;
+  pointer-events: unset;
+  width: 100%;
+  padding: 0.5rem 0.3rem;
+}

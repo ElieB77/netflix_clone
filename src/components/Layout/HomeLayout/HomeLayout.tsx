@@ -35,11 +35,8 @@ export const HomeLayout = (props: HomeLayoutProps): JSX.Element => {
     topRatedMovies,
   } = props;
 
-  const [showModal, setShowModal] = useState<boolean>(false);
-
   return (
     <>
-      <Navbar />
       <Cover
         poster_path={coverImage}
         title={coverTitle}
@@ -60,10 +57,8 @@ export const HomeLayout = (props: HomeLayoutProps): JSX.Element => {
       <Modal
         isActive={isOpen}
         onClick={closeModal}
-        content={<ModalInfoLayout isMounted={showModal} />}
+        content={<ModalInfoLayout isMounted={isOpen} />}
       />
-
-      <Footer />
     </>
   );
 };

@@ -20,7 +20,7 @@
 }
 
 .modal__info_details_left span {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 .modal__info_details_left_vote {
@@ -60,4 +60,9 @@
 .modal__info_overview {
   padding: 0 3rem;
   width: 500px;
+}
+
+.modal__info_overview span {
+  display: block;
+  color: var(--secondary-dark);
 }

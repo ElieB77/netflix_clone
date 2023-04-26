@@ -5,6 +5,7 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { SearchBar } from "../SearchBar";
 
 export const Navbar = (): JSX.Element => {
   const router = useRouter();
@@ -56,7 +57,7 @@ export const Navbar = (): JSX.Element => {
           })}
         </ul>
       </div>
-      <div className={styles.navbar__icons}>
+      {/* <div className={styles.navbar__icons}>
         {icons.map((icon: IconType) => {
           const { src, width, height, alt, id } = icon;
           return (
@@ -70,7 +71,8 @@ export const Navbar = (): JSX.Element => {
             />
           );
         })}
-      </div>
+      </div> */}
+      <SearchBar />
     </nav>
   );
 };

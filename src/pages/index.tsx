@@ -3,6 +3,9 @@ import { fetchData } from "@/services/http";
 import { MovieResponseType } from "@/types/media";
 import { GetStaticProps } from "next";
 import { HomeLayout } from "@/components/Layout/HomeLayout";
+import { useRouter } from "next/router";
+import { SearchLayout } from "@/components/Layout/SearchLayout";
+import { useSearch } from "@/contexts";
 
 interface HomeProps {
   popularMovies: MovieResponseType;
@@ -21,6 +24,9 @@ export default function Home(props: HomeProps): JSX.Element {
     topRatedMovies,
   } = props;
 
+  const router = useRouter();
+  console.log(router.query);
+
   return (
     <>
       <Head>
@@ -29,22 +35,26 @@ export default function Home(props: HomeProps): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <HomeLayout
-        coverId={popularMovies.results[0].id}
-        coverImage={popularMovies.results[0].poster_path}
-        coverTitle={popularMovies.results[0].title}
-        coverOverview={popularMovies.results[0].overview}
-        trendingMedia={trendingMedia}
-        popularMovies={popularMovies}
-        latestTVShows={latestTVShows}
-        topRatedTVShows={topRatedTVShows}
-        topRatedMovies={topRatedMovies}
-      />
+      {!router.query.query ? (
+        <HomeLayout
+          coverId={popularMovies.results[0].id}
+          coverImage={popularMovies.results[0].poster_path}
+          coverTitle={popularMovies.results[0].title}
+          coverOverview={popularMovies.results[0].overview}
+          trendingMedia={trendingMedia}
+          popularMovies={popularMovies}
+          latestTVShows={latestTVShows}
+          topRatedTVShows={topRatedTVShows}
+          topRatedMovies={topRatedMovies}
+        />
+      ) : (
+        <SearchLayout />
+      )}
     </>
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (context: any) => {
   const popularMovies: MovieResponseType = await fetchData(
     `/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
   );

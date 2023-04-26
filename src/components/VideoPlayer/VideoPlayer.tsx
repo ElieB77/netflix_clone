@@ -1,23 +1,37 @@
 /* eslint-disable @next/next/no-img-element */
+import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import styles from "./styles.module.css";
+import { useModal } from "@/contexts";
 
 interface VideoPlayerProps {
   isMuted: boolean;
   videoUrl: string;
   poster_path?: string;
+  isPlaying: boolean;
 }
 
 export const VideoPlayer = ({
   isMuted,
   videoUrl,
   poster_path,
+  isPlaying,
 }: VideoPlayerProps): JSX.Element => {
-  return videoUrl ? (
+  const [hasEnded, setHasEnded] = useState<boolean>(false);
+  const { isOpen } = useModal();
+
+  useEffect(() => {
+    if (!isOpen) {
+      setHasEnded(false);
+    }
+  }, [isOpen]);
+
+  return videoUrl && !hasEnded ? (
     <ReactPlayer
+      onEnded={() => setHasEnded(true)}
       volume={1}
       muted={isMuted}
-      playing={true}
+      playing={isPlaying}
       config={{
         youtube: {
           playerVars: { modestbranding: 1 },

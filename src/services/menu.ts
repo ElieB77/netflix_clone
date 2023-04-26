@@ -9,7 +9,7 @@ export const menu: MenuType = {
     },
     {
       content: "My List",
-      href: "/mylist",
+      href: "/my-list",
       id: "4",
     },
   ],
