@@ -5,7 +5,6 @@ import { GetStaticProps } from "next";
 import { HomeLayout } from "@/components/Layout/HomeLayout";
 import { useRouter } from "next/router";
 import { SearchLayout } from "@/components/Layout/SearchLayout";
-import { useSearch } from "@/contexts";
 
 interface HomeProps {
   popularMovies: MovieResponseType;
