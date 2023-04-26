@@ -57,7 +57,7 @@ export const HomeLayout = (props: HomeLayoutProps): JSX.Element => {
       <Modal
         isActive={isOpen}
         onClick={closeModal}
-        content={<ModalInfoLayout isMounted={isOpen} />}
+        content={<ModalInfoLayout />}
       />
     </>
   );
