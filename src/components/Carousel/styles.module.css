@@ -8,12 +8,34 @@
 .carousel:hover .carousel__header_progress {
   display: flex;
 }
+.carousel:hover .carousel__header_title span {
+  opacity: 1;
+}
 
 .carousel__header {
   padding: 0 0 0.5rem 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.carousel__header_title {
+  display: flex;
+  align-items: center;
+}
+
+.carousel__header_title span {
+  font-size: 13px;
+  color: #54b9c5;
+  margin-left: 1rem;
+  font-family: "Roboto Bold", sans-serif;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.carousel__header_title span img {
+  filter: invert(68%) sepia(47%) saturate(462%) hue-rotate(138deg)
+    brightness(89%) contrast(83%);
 }
 
 .carousel__header_progress {

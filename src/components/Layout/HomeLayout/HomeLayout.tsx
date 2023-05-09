@@ -44,14 +44,31 @@ export const HomeLayout = (props: HomeLayoutProps): JSX.Element => {
         handleClickMoreInfoButton={() => openModal(coverId, true)}
       />
       <div className={styles.carousel__container}>
-        <Carousel data={trendingMedia.results} heading={"Trending now"} />
-        <Carousel data={popularMovies.results} heading={"Popular movies"} />
-        <Carousel data={latestTVShows.results} heading={"Popular TV Shows"} />
+        <Carousel
+          data={trendingMedia.results}
+          heading={"Trending now"}
+          category="trending-all-day"
+        />
+        <Carousel
+          data={popularMovies.results}
+          heading={"Popular movies"}
+          category="movie-popular"
+        />
+        <Carousel
+          data={latestTVShows.results}
+          heading={"Popular TV Shows"}
+          category="tv-on_the_air"
+        />
         <Carousel
           data={topRatedTVShows.results}
           heading={"Top-rated TV Shows"}
+          category="tv-top_rated"
         />
-        <Carousel data={topRatedMovies.results} heading={"Top-rated movies"} />
+        <Carousel
+          data={topRatedMovies.results}
+          heading={"Top-rated movies"}
+          category="movie-top_rated"
+        />
       </div>
 
       <Modal

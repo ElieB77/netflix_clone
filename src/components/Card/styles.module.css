@@ -5,6 +5,8 @@
   position: relative;
   transition: all 0.5s ease;
   z-index: 999;
+  display: flex;
+  position: relative;
 }
 
 .card:hover .card__details {

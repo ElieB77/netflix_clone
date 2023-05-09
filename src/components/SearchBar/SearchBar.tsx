@@ -34,7 +34,8 @@ export const SearchBar = (): JSX.Element => {
 
   useEffect(() => {
     if (searchQuery) {
-      router.push({
+      router.replace({
+        pathname: "/",
         query: {
           query: searchQuery.toLowerCase(),
         },

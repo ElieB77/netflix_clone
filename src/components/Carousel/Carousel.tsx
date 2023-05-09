@@ -3,11 +3,12 @@ import Image from "next/image";
 import { useState } from "react";
 import { Card } from "../Card";
 import { useModal } from "@/contexts";
-import { MovieResponseType } from "@/types/media";
+import Link from "next/link";
 
 interface CarouselProps {
   data?: any;
   heading: string;
+  category: string;
 }
 
 export const Carousel = (props: CarouselProps): JSX.Element => {
@@ -34,7 +35,20 @@ export const Carousel = (props: CarouselProps): JSX.Element => {
     <>
       <div className={styles.carousel}>
         <div className={styles.carousel__header}>
-          <h2 className={styles.carousel__header_title}>{props.heading}</h2>
+          <h2 className={styles.carousel__header_title}>
+            {props.heading}
+            <Link href={`/media/${props.category}`}>
+              <span>
+                See all{" "}
+                <Image
+                  src="/images/chevron-right-solid.svg"
+                  width={10}
+                  height={10}
+                  alt="See all icon"
+                />
+              </span>
+            </Link>
+          </h2>
           <div className={styles.carousel__header_progress}>
             {Array(4)
               .fill(null)

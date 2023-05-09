@@ -27,27 +27,25 @@ export const ModalInfoLayout = (): JSX.Element => {
 
   return (
     <div className={styles.modal__info}>
-      <Suspense fallback={<Skeleton count={5} />}>
-        <div className={styles.modal__info_video}>
-          <VideoPlayer
+      <div className={styles.modal__info_video}>
+        <VideoPlayer
+          isMuted={isMuted}
+          videoUrl={mediaVideoUrl(mediaData)!}
+          poster_path={
+            mediaData?.poster_path
+              ? `${process.env.NEXT_PUBLIC_IMAGE_PATH}${mediaData?.poster_path}`
+              : "/images/default-poster.svg"
+          }
+          isPlaying={isOpen}
+        />
+        <div className={styles.modal__info_video_controls}>
+          <VideoControls
             isMuted={isMuted}
-            videoUrl={mediaVideoUrl(mediaData)!}
-            poster_path={
-              mediaData?.poster_path
-                ? `${process.env.NEXT_PUBLIC_IMAGE_PATH}${mediaData?.poster_path}`
-                : "/images/default-poster.svg"
-            }
-            isPlaying={isOpen}
+            handleVolume={() => setIsMuted(!isMuted)}
+            isVideo={mediaData?.videos.results.length !== 0 ? true : false}
           />
-          <div className={styles.modal__info_video_controls}>
-            <VideoControls
-              isMuted={isMuted}
-              handleVolume={() => setIsMuted(!isMuted)}
-              isVideo={mediaData?.videos.results.length !== 0 ? true : false}
-            />
-          </div>
         </div>
-      </Suspense>
+      </div>
       <div className={styles.modal__info_details}>
         <div className={styles.modal__info_details_left}>
           <div>

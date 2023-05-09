@@ -10,14 +10,30 @@ interface CardProps {
 }
 
 export const Card = ({ onClick, posterPath }: CardProps): JSX.Element => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setTimeout(() => {
+      setImageLoaded(true);
+    }, 2000);
+  };
+
   return (
     <>
       <div className={styles.card} onClick={onClick}>
+        {/* {posterPath && ( */}
+        {/* <> */}
+        {/* {!imageLoaded && <div className={styles.skeleton}></div>} */}
+
         <img
           className={styles.card__image}
-          src={posterPath || "Hello"}
+          src={posterPath}
           alt="card"
+          onLoad={handleImageLoad}
+          // style={{ display: imageLoaded ? "block" : "none" }}
         />
+        {/* </> */}
+        {/* )} */}
       </div>
     </>
   );
